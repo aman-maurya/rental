@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Header } from 'react-native-elements';
-const FixedHeader = () => (
-    <Header
-        placement="left"
-        leftComponent={{ icon: 'menu', color: '#fff' }}
-        centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-        rightComponent={{ icon: 'home', color: '#fff' }}
-    />
-)
+import MenuButton from './MenuButton';
 
-export default FixedHeader;
+const AppHeader = props => {
+  return (
+    <Header
+      leftComponent={<MenuButton navigation={props.navigation} />}
+      centerComponent={{
+        text: props.title,
+        style: {color: '#fff', fontWeight: 'bold'},
+      }}
+      statusBarProps={{barStyle: 'light-content'}}
+    />
+  );
+};
+
+export default AppHeader;

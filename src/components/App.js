@@ -7,8 +7,9 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import FixedHeader from './common/elements/Header';
+import { Platform, StyleSheet, Text, View,Button } from 'react-native';
+import AppDrawerContainer from './common/navigator/Drawer';
+import AppHeader from './common/elements/Header';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n Cmd+D or shake for dev menu',
@@ -21,9 +22,7 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <FixedHeader/>
-      </View>
+        <AppDrawerContainer />
     );
   }
 }
@@ -33,15 +32,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
