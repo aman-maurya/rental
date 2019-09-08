@@ -1,51 +1,50 @@
 import React from 'react';
-import {DashboardScreen, HomeScreen, SettingScreen} from '../screens';
+import {StyleSheet} from 'react-native';
+import {DashboardScreen, UsersScreen, SettingScreen} from '../screens';
 import {Icon} from 'react-native-elements';
 import {
   createDrawerNavigator,
-  createSwitchNavigator,
-  createStackNavigator,
   createAppContainer,
 } from 'react-navigation';
 
-const AppStackNavigation = createStackNavigator(
-  {
-    Dashboard: DashboardScreen,
-    Home: HomeScreen,
-    Setting: SettingScreen,
+const styles = StyleSheet.create({
+  icon: {
+    height: 30,
+    width: 40,
+    paddingLeft: 8,
+    paddingTop: 2,
   },
-  {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        headerLeft: (
-          <Icon
-            name="sc-telegram"
-            size={40}
-            type="evilicon"
-            style={{paddingLeft: 10}}
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-      };
-    },
-  },
-);
+});
 
-const AppDrawerNavigation = createDrawerNavigator(
-  {
-    Dashboard: DashboardScreen,
-    Home: HomeScreen,
-    Setting: SettingScreen,
-  },
-  {
-    navigationOptions: ({navigation}) => {
-      const {routeName} = navigation.state.routes[navigation.state.index];
-      return {
-        headerTitle: routeName,
-      };
+const AppDrawerNavigation = createDrawerNavigator({
+  Home: {
+    screen: DashboardScreen,
+    navigationOptions: {
+      drawerLabel: 'Home',
+      drawerIcon: (
+        <Icon iconStyle={styles.icon} type="font-awesome" name="home" />
+      ),
     },
   },
-);
+  Users: {
+    screen: UsersScreen,
+    navigationOptions: {
+      drawerLabel: 'Users',
+      drawerIcon: (
+        <Icon iconStyle={styles.icon} type="font-awesome" name="users" />
+      ),
+    },
+  },
+  Setting: {
+    screen: SettingScreen,
+    navigationOptions: {
+      drawerLabel: 'Setting',
+      drawerIcon: (
+        <Icon iconStyle={styles.icon} type="font-awesome" name="cogs" />
+      ),
+    },
+  },
+});
 
 const AppDrawerContainer = createAppContainer(AppDrawerNavigation);
 

@@ -6,16 +6,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
   },
 });
 
 class SettingScreen extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <AppHeader navigation={this.props.navigation} title="Setting" />
-        <Text> SettingScreen </Text>
+        <View style={styles.container}>
+          <Text> Setting Screen </Text>
+        </View>
       </View>
     );
   }
