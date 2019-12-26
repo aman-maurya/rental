@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native';
 import AppHeader from '../elements/Header';
 import {Icon} from 'react-native-elements';
+
+const GLOBAL = require('../../../Globals');
 
 const styles = StyleSheet.create({
   container: {
@@ -15,13 +19,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 160,
-    borderColor: '#eff0f1',
+    borderColor: GLOBAL.COLOR.LIGHTGREY,
     borderWidth: 1,
     height: 130,
     padding: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
-    shadowColor: '#000000',
+    shadowColor: GLOBAL.COLOR.BLACK,
     shadowOpacity: 0.8,
     shadowRadius: 1,
     shadowOffset: {
@@ -41,23 +45,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     fontSize: 17,
+    color: GLOBAL.COLOR.BLACK,
+    fontFamily: GLOBAL.FONT_FAMILY.BOLD,
   },
 });
 
 const DashboardControl = props => {
+  const {navigate} = props.navigation;
   return (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.5}
         style={[styles.buttonContainer, styles.leftBtn]}
-        onPress={() => alert('Navigate to users screen')}>
+        onPress={() => navigate('Users')}>
         <Icon type="font-awesome" name="users" size={80} color="#eff0f1" />
         <Text style={styles.btnLabel}>Users</Text>
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.5}
         style={[styles.buttonContainer, styles.rightBtn]}
-        onPress={() => alert('Navigate to setting screen')}>
+        onPress={() => navigate('Setting')}>
         <Icon type="font-awesome" name="cogs" size={80} color="#eff0f1" />
         <Text style={styles.btnLabel}>Setting</Text>
       </TouchableOpacity>
@@ -70,7 +77,7 @@ class DashboardScreen extends Component {
     return (
       <View>
         <AppHeader navigation={this.props.navigation} title="Home" />
-        <DashboardControl />
+        <DashboardControl navigation={this.props.navigation} />
       </View>
     );
   }

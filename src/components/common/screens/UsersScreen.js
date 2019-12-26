@@ -1,8 +1,14 @@
+/* eslint-disable react/prop-types */
 import React, {Component} from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
-import {List, ListItem, SearchBar} from 'react-native-elements';
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
+import {Icon, SearchBar} from 'react-native-elements';
 import AppHeader from '../elements/Header';
-import {UsersList} from '../elements';
+import {UsersList,Fab} from '../elements';
 
 class UsersScreen extends Component {
   constructor(props) {
@@ -14,6 +20,7 @@ class UsersScreen extends Component {
       page: 1,
       seed: 1,
       error: null,
+      active: false,
       refreshing: false,
     };
   }
@@ -80,7 +87,12 @@ class UsersScreen extends Component {
   };
 
   renderHeader = () => {
-    return <SearchBar placeholder="Type Here..." lightTheme round />;
+    return (
+      <View>
+        <AppHeader navigation={this.props.navigation} title="Users" />
+        <SearchBar placeholder="Type Here..." lightTheme round />
+      </View>
+    );
   };
 
   renderFooter = () => {
@@ -100,18 +112,23 @@ class UsersScreen extends Component {
 
   render() {
     return (
-      <FlatList
-        data={this.state.data}
-        renderItem={({item}) => <UsersList users={item} />}
-        keyExtractor={item => item.login.uuid}
-        ItemSeparatorComponent={this.renderSeparator}
-        ListHeaderComponent={this.renderHeader}
-        ListFooterComponent={this.renderFooter}
-        onRefresh={this.handleRefresh}
-        refreshing={this.state.refreshing}
-        onEndReached={this.handleLoadMore}
-        onEndReachedThreshold={50}
-      />
+      <View style={{flex: 1, backgroundColor: '#eff0f1'}}>
+        <FlatList
+          data={this.state.data}
+          renderItem={({item}) => (
+            <UsersList navigation={this.props.navigation} users={item} />
+          )}
+          keyExtractor={item => item.login.uuid}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
+          ListFooterComponent={this.renderFooter}
+          onRefresh={this.handleRefresh}
+          refreshing={this.state.refreshing}
+          onEndReached={this.handleLoadMore}
+          onEndReachedThreshold={50}
+        />
+        <Fab navigation={this.props.navigation} screen="Add_User" />
+      </View>
     );
   }
 }

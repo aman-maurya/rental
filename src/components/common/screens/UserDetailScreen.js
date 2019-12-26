@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import AppHeader from '../elements/Header';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,17 +9,16 @@ const styles = StyleSheet.create({
   },
 });
 
-class SettingScreen extends Component {
+class UserDetailScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <AppHeader navigation={this.props.navigation} title="Setting" />
         <View style={styles.container}>
-          <Text> Setting Screen </Text>
+          <Text> User Detail Screen </Text>
         </View>
       </View>
     );
   }
 }
 
-export {SettingScreen};
+export {UserDetailScreen};
